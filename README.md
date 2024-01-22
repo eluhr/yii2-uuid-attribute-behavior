@@ -42,7 +42,7 @@ public function behaviors(): array
 By using this behavior it does not matter if the attribute is a string or an array. 
 The behavior will always ensure, that the attribute is an array before saving the data to the database and yii will handle the rest.
 
-This behavior supports [i18n](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n). By adding the `uuid-attribute-behavior` category in your config you can overwrite the default error messages.
+This behavior supports [i18n](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n). By adding the `uuid-attribute-validator` category in your config you can overwrite the default error messages.
 
 Testing
 -------
