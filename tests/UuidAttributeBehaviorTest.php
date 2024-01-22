@@ -4,11 +4,13 @@ use eluhr\uuidAttributeBehavior\behaviors\UuidAttributeBehavior;
 use PHPUnit\Framework\TestCase;
 use yii\base\Model;
 
-final class JsonAttributeBehaviorTest extends TestCase
+final class UuidAttributeBehaviorTest extends TestCase
 {
     public function testValidateAttributeNotEmpty(): void
     {
-        $this->assertIsString((new Item(['data_json' => '{"a": "b"}']))->uuid);
+        $item = new Item();
+        $item->generateUuid();
+        $this->assertIsString($item->uuid);
     }
 }
 
@@ -39,6 +41,27 @@ class Item extends Model
         $rules = parent::rules();
         $rules[] = [['uuid'], 'required'];
         return $rules;
+    }
+
+    // Mock active record methods
+    public function getIsNewRecord()
+    {
+        return true;
+    }
+
+    public function hasAttribute($name)
+    {
+        return true;
+    }
+
+    public function getAttribute($name)
+    {
+        return $this->getAttributes($name)[$name] ?? null;
+    }
+
+    public function setAttribute($name, $value)
+    {
+        $this->setAttributes([$name => $value]);
     }
 }
 
